@@ -8,11 +8,11 @@ other implementations either because they tried to do too much or because they
 didn't support the most basic cases of CSS.
 
 This is a simple library that allows you to apply styles to React elements and
-also have both **variants** and **inheritance**.
+also do both **variants** and **inheritance**.
 
 ## Variants
 
-A component will have a base style. Variants are those states/props that make the
+A component will have a base style. Variants are those that `states` / `props` will make the
 component look different. Those are usually implemented in CSS through `--my-class`
 modifiers or pseudo-selectors like `:hover`.
 
@@ -20,7 +20,7 @@ modifiers or pseudo-selectors like `:hover`.
 
 Depending on the context (which parent contains your component) you may want to
 overwrite or add new styles to it. This is usually implemented in CSS by nesting selectors
-like `ul li`.
+like `ul li`. In React you can pass styles to a children with the `styles` prop.
 
 ## API
 
@@ -37,20 +37,19 @@ Given a stylesheet like the following:
 stylesheet = {
   item: {background: 'white'}
 }
+let st = styler(this, stylesheet);
 
-...
+// Just select the given style
+st('item'); // => {background: 'white'}
 
-st = styler(this, stylesheet);
+// Select the style and pass it as an object with the same key. Ideal for inheritance
+st(['item']); // => {item: {background: 'white'}}
+
+// Same than the previous one but with an arbitrary key
+st({avatar: 'item'}); // => {avatar: {background: 'white'}}
 ```
 
-The resulting method can be applied like:
-
-  - `st('item')` => Just select the given style: `{background: 'white'}`
-  - `st(['item'])` => Select the style and pass it as an object with the same key. Ideal for inheritance: `{item: {background: 'white'}}`
-  - `st({avatar: 'item'})` => Same than the previous one but with an arbitrary key: `{avatar: {background: 'white'}}`
-
-
-## Example
+## Full example
 
 ```js
 // components/avatar.js
