@@ -85,7 +85,7 @@ Item.render = function () {
     
   return (
     <li style={st('item')}>
-      <Avatar style={st(['avatar'])} name={this.props.thread.author} />
+      <Avatar style={st(['avatar'])} author={this.props.thread.author} />
       {this.props.thread.subject}
     </li>
   );
